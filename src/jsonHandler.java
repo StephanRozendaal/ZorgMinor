@@ -25,15 +25,9 @@ public class jsonHandler {
 	 */
 	public JSONObject executeJSON(int type) throws Exception {
 		switch (type) {
-		case 1: {
-			sense_login = new URL("http://api.sense-os.nl/devices.json");
-		}
-		case 2: {
-			sense_login = new URL("http://api.sense-os.nl/sensors.json");
-		}
-		case 3: {
-			// TODO
-		}
+		case 1: sense_login = new URL("http://api.sense-os.nl/devices.json"); break;
+		case 2: sense_login = new URL("http://api.sense-os.nl/sensors.json"); break;
+		default: sense_login = null;
 		}
 		connection = (HttpURLConnection) sense_login.openConnection();
 		connection.setRequestMethod("GET");

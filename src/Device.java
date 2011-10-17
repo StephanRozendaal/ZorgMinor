@@ -1,7 +1,10 @@
+import java.util.LinkedList;
+
 public class Device {
 
 	private int ID;
 	private String uuid, type;
+	private LinkedList<Sensor> sensors;
 
 	/**
 	 * sense devices (smartphones) omgezet vanuit sense (JSON) naar een Java
@@ -18,6 +21,7 @@ public class Device {
 		this.ID = ID;
 		this.uuid = uuid;
 		this.type = type;
+		this.sensors = new LinkedList<Sensor>();
 	}
 
 	public int getID() {
@@ -42,6 +46,9 @@ public class Device {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	public void add(Sensor s) {
+		sensors.add(s);
 	}
 
 }
