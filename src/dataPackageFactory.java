@@ -44,14 +44,13 @@ public class dataPackageFactory {
 		JSONObject tempsensor = json.executeJSON(JSON_TYPES.sensor);
 		JSONObject tempdevice = json.executeJSON(JSON_TYPES.device);
 		JSONArray temparr = tempdevice.getJSONArray("devices");
-		JSONArray tempdevarr = tempdevice.getJSONArray("sensors");
+		JSONArray tempdevarr = tempsensor.getJSONArray("sensors");
 		for(int i = 0; temparr.size() > i; i++) {
 			tempdevice = temparr.getJSONObject(i);
 			Device device = new Device(tempdevice.getInt("id"),
 					tempdevice.getString("uuid"), tempdevice.getString("type"));
-			j = 0;
-			while (tempdevarr.size() >= j) {
-				tempsensor = tempdevarr.getJSONObject(i);
+			for(j = 0; tempdevarr.size() > j; j++) {
+				tempsensor = tempdevarr.getJSONObject(j);
 				device.add(new Sensor(tempsensor.getInt("id"), tempsensor
 						.getString("name"), tempsensor.getString("type"),
 						tempsensor.getString("device_type"), tempsensor
