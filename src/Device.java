@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import static java.lang.System.out;
 
 public class Device {
 
@@ -17,6 +18,7 @@ public class Device {
 	 * @param type
 	 *            Device naam
 	 */
+	
 	public Device(int ID, String uuid, String type) {
 		this.ID = ID;
 		this.uuid = uuid;
@@ -49,6 +51,17 @@ public class Device {
 	}
 	public void add(Sensor s) {
 		sensors.add(s);
+	}
+	
+	public void print() {
+		out.printf(
+				"Device uuid: %s \n" +
+				"Device type: %s \n" +
+				"Device ID: %s \n \n",uuid, type, ID);
+		for(int i = 0; sensors.size() > i; i++) {
+			sensors.get(i).print();
+		}
+		
 	}
 
 }

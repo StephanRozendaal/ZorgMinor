@@ -20,17 +20,16 @@ public class dataPackageFactory {
 	 * 
 	 * @throws Exception
 	 */
+	
 	public dataPackageFactory() throws Exception {
 		sense_login = new loginToSense("srozendaal",
 				"e967b1366fe2c2997520eec0968cb20d");
 		devices = new LinkedList<Device>();
 		json = new jsonHandler(sense_login.getSessionId());
 		initSenseDevices();
-
 	}
 
 	public dataPackage requestNewPackage() {
-
 		return null;
 	}
 
@@ -41,32 +40,28 @@ public class dataPackageFactory {
 	 * @throws Exception
 	 */
 	private void initSenseDevices() throws Exception {
-		int i = 0, j = 0;
-		JSONObject tempjson = json.executeJSON(1);
-		JSONObject tempdevices = json.executeJSON(2);
-		JSONArray temparr = tempjson.getJSONArray("devices");
-		JSONArray tempdevarr = tempdevices.getJSONArray("sensors");
-		try{
-		while (temparr.size() >= i) {
-			tempjson = temparr.getJSONObject(i);
-			Device tempdevice = new Device(tempjson.getInt("id"),
-					tempjson.getString("uuid"), tempjson.getString("type"));
-			i++;
+		int j;
+		JSONObject tempsensor = json.executeJSON(JSON_TYPES.sensor);
+		JSONObject tempdevice = json.executeJSON(JSON_TYPES.device);
+		JSONArray temparr = tempdevice.getJSONArray("devices");
+		JSONArray tempdevarr = tempdevice.getJSONArray("sensors");
+		for(int i = 0; temparr.size() > i; i++) {
+			tempdevice = temparr.getJSONObject(i);
+			Device device = new Device(tempdevice.getInt("id"),
+					tempdevice.getString("uuid"), tempdevice.getString("type"));
+			j = 0;
 			while (tempdevarr.size() >= j) {
-				tempjson = tempdevarr.getJSONObject(i);
-				tempdevice.add(new Sensor(tempjson.getInt("id"), tempjson
-						.getString("name"), tempjson.getString("type"),
-						tempjson.getString("device_type"), tempjson
-								.getString("pager_type"), tempjson
-								.getString("display_name"), tempjson
-								.getString("data_type"), tempjson
-								.getJSONObject("data_structure")));
+				tempsensor = tempdevarr.getJSONObject(i);
+				device.add(new Sensor(tempsensor.getInt("id"), tempsensor
+						.getString("name"), tempsensor.getString("type"),
+						tempsensor.getString("device_type"), tempsensor
+								.getString("pager_type"), tempsensor
+								.getString("display_name"), tempsensor
+								.getString("data_type")));
 				j++;
 			}
-			devices.add(tempdevice);
-		}
-		} catch (Exception e) {
-			continue;
+			devices.add(device);
+			device.print();
 		}
 	}
 }

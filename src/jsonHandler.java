@@ -23,10 +23,10 @@ public class jsonHandler {
 	 *            devices 2. = sensors 3. = sensor data
 	 * @return JSONObject
 	 */
-	public JSONObject executeJSON(int type) throws Exception {
+	public JSONObject executeJSON(JSON_TYPES type) throws Exception {
 		switch (type) {
-		case 1: sense_login = new URL("http://api.sense-os.nl/devices.json"); break;
-		case 2: sense_login = new URL("http://api.sense-os.nl/sensors.json"); break;
+		case device: sense_login = new URL("http://api.sense-os.nl/devices.json"); break;
+		case sensor: sense_login = new URL("http://api.sense-os.nl/sensors.json"); break;
 		default: sense_login = null;
 		}
 		connection = (HttpURLConnection) sense_login.openConnection();
@@ -36,19 +36,14 @@ public class jsonHandler {
 		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setRequestProperty("X-SESSION_ID", session_id);
 		connection.setConnectTimeout(5000);
-
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				connection.getInputStream()));
-
 		String inputLine;
 		StringBuilder strbuilder = new StringBuilder();
-
 		while ((inputLine = in.readLine()) != null)
 			strbuilder.append(inputLine);
-
 		in.close();
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder.toString());
-
 		return jsonObject;
 
 	}
