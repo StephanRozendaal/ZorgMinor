@@ -53,6 +53,10 @@ public class Device {
 		sensors.add(s);
 	}
 	
+	public LinkedList<Sensor> getSensor() {
+		return sensors;
+	}
+	
 	public void print() {
 		out.printf(
 				"Device uuid: %s \n" +

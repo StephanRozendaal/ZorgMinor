@@ -30,8 +30,13 @@ public class dataPackageFactory {
 		initSenseDevices();
 	}
 
-	public dataPackage requestNewPackage() {
-		return null;
+	public dataPackage requestNewPackage() throws Exception {
+		LinkedList<Sensor> sen = devices.getFirst().getSensor();
+		dataPackage pak = new dataPackage();
+		for(int i = 0; i < sen.size(); i++) {
+			pak.add(json.executeJSON(sen.get(i)));
+		}
+		return pak;
 	}
 
 	/**

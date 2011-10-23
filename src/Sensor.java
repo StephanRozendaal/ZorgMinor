@@ -13,7 +13,6 @@ public class Sensor {
 	int id;
 	String name, type, device_type, pager_type, display_name, data_type;
 	public Object data_structure;
-	//JSONObject data_structure;
 
 	public Sensor(int id, String name, String type, String device_type,
 			String pager_type, String display_name, String data_type) {

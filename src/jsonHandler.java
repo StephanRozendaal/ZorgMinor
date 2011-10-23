@@ -45,6 +45,25 @@ public class jsonHandler {
 		in.close();
 		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder.toString());
 		return jsonObject;
+	}
 
+	public JSONObject executeJSON(Sensor sen) throws Exception {
+		sense_login = new URL("http://api.sense-os.nl/sensors/"+sen.id+"/data.json");
+		connection = (HttpURLConnection) sense_login.openConnection();
+		connection.setRequestMethod("GET");
+		connection.setDoOutput(true);
+		connection.setDoInput(true);
+		connection.setRequestProperty("Content-Type", "application/json");
+		connection.setRequestProperty("X-SESSION_ID", session_id);
+		connection.setConnectTimeout(5000);
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				connection.getInputStream()));
+		String inputLine;
+		StringBuilder strbuilder = new StringBuilder();
+		while ((inputLine = in.readLine()) != null)
+			strbuilder.append(inputLine);
+		in.close();
+		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder.toString());
+		return jsonObject;
 	}
 }
