@@ -1,9 +1,19 @@
 import static java.lang.System.out;
-
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+/**
+ * Sensor dataklasse
+ * TODO data_structure field oplossing zoeken.
+ * dit field kan varieren, JSONobject, boolean of string etc..
+ * @author stephan
+ *
+ */
 public class Sensor {
 
 	int id;
 	String name, type, device_type, pager_type, display_name, data_type;
+	public Object data_structure;
+	//JSONObject data_structure;
 
 	public Sensor(int id, String name, String type, String device_type,
 			String pager_type, String display_name, String data_type) {

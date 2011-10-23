@@ -2,6 +2,7 @@ import java.util.LinkedList;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * Deze factory maakt dataPackages uit sense sensor data
@@ -51,12 +52,19 @@ public class dataPackageFactory {
 					tempdevice.getString("uuid"), tempdevice.getString("type"));
 			for(j = 0; tempdevarr.size() > j; j++) {
 				tempsensor = tempdevarr.getJSONObject(j);
-				device.add(new Sensor(tempsensor.getInt("id"), tempsensor
+				Sensor s = new Sensor(tempsensor.getInt("id"), tempsensor
 						.getString("name"), tempsensor.getString("type"),
 						tempsensor.getString("device_type"), tempsensor
 								.getString("pager_type"), tempsensor
 								.getString("display_name"), tempsensor
-								.getString("data_type")));
+								.getString("data_type"));
+				if(tempsensor.getString("data_type").equalsIgnoreCase("json") == true)
+					s.data_structure = (JSONObject)JSONSerializer.toJSON(tempsensor.getJSONObject("data_structure"));
+				if(tempsensor.getString("data_type").equalsIgnoreCase("string") == true)
+					s.data_structure = "String";
+				if(tempsensor.getString("data_type").equalsIgnoreCase("bool") == true)
+					s.data_structure = true; // oplossing om data_structure naar boolean te casten.
+				device.add(s);
 				j++;
 			}
 			devices.add(device);
