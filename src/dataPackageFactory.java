@@ -36,6 +36,7 @@ public class dataPackageFactory {
 		for(int i = 0; i < sen.size(); i++) {
 			pak.add(json.executeJSON(sen.get(i)));
 		}
+		pak.print();
 		return pak;
 	}
 
@@ -73,7 +74,7 @@ public class dataPackageFactory {
 				j++;
 			}
 			devices.add(device);
-			device.print();
+			//device.print();
 		}
 	}
 }

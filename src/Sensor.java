@@ -1,6 +1,5 @@
 import static java.lang.System.out;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
+
 /**
  * Sensor dataklasse
  * TODO data_structure field oplossing zoeken.
