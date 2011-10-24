@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
@@ -25,9 +27,14 @@ public class jsonHandler {
 	 */
 	public JSONObject executeJSON(JSON_TYPES type) throws Exception {
 		switch (type) {
-		case device: sense_login = new URL("http://api.sense-os.nl/devices.json"); break;
-		case sensor: sense_login = new URL("http://api.sense-os.nl/sensors.json"); break;
-		default: sense_login = null;
+		case device:
+			sense_login = new URL("http://api.sense-os.nl/devices.json");
+			break;
+		case sensor:
+			sense_login = new URL("http://api.sense-os.nl/sensors.json");
+			break;
+		default:
+			sense_login = null;
 		}
 		connection = (HttpURLConnection) sense_login.openConnection();
 		connection.setRequestMethod("GET");
@@ -43,12 +50,29 @@ public class jsonHandler {
 		while ((inputLine = in.readLine()) != null)
 			strbuilder.append(inputLine);
 		in.close();
-		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder.toString());
+		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder
+				.toString());
 		return jsonObject;
 	}
 
-	public JSONObject executeJSON(Sensor sen) throws Exception {
-		sense_login = new URL("http://api.sense-os.nl/sensors/"+sen.id+"/data.json");
+	/**
+	 * Deze methode wordt gebruikt om de sensordata op te halen uit sense
+	 * 
+	 * @param sen
+	 *            De sensor waarvoor data opgehaald wordt.
+	 * @param start_date
+	 *            start datum van sensordata
+	 * @param end_date
+	 *            eind datum van sensordata
+	 * @return JSONObject met daarin sensordata
+	 * @throws Exception
+	 */
+	public JSONObject executeJSON(Sensor sen, Date start_date, Date end_date)
+			throws Exception {
+		String query = String.format("start_date=%s&end_date=%s",
+				start_date.getTime(), end_date.getTime());
+		sense_login = new URL("http://api.sense-os.nl/sensors/" + sen.id
+				+ "/data.json" + "?" + query);
 		connection = (HttpURLConnection) sense_login.openConnection();
 		connection.setRequestMethod("GET");
 		connection.setDoOutput(true);
@@ -63,7 +87,8 @@ public class jsonHandler {
 		while ((inputLine = in.readLine()) != null)
 			strbuilder.append(inputLine);
 		in.close();
-		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder.toString());
+		JSONObject jsonObject = (JSONObject) JSONSerializer.toJSON(strbuilder
+				.toString());
 		return jsonObject;
 	}
 }

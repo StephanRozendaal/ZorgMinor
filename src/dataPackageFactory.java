@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.LinkedList;
 
 import net.sf.json.JSONArray;
@@ -15,6 +16,7 @@ public class dataPackageFactory {
 	private loginToSense sense_login;
 	private LinkedList<Device> devices;
 	private jsonHandler json;
+	private Date lastpackagedate;
 
 	/**
 	 * constructor
@@ -27,14 +29,18 @@ public class dataPackageFactory {
 				"e967b1366fe2c2997520eec0968cb20d");
 		devices = new LinkedList<Device>();
 		json = new jsonHandler(sense_login.getSessionId());
+		lastpackagedate = new Date();
 		initSenseDevices();
 	}
 
 	public dataPackage requestNewPackage() throws Exception {
 		LinkedList<Sensor> sen = devices.getFirst().getSensor();
-		dataPackage pak = new dataPackage();
+		//Date old = lastpackagedate;
+		Date old = new Date(1000000000); // dit is even om te testen, zodat er altijd data terugkomt van datums.
+		lastpackagedate = new Date();
+		dataPackage pak = new dataPackage(lastpackagedate, old);
 		for(int i = 0; i < sen.size(); i++) {
-			pak.add(json.executeJSON(sen.get(i)));
+			pak.add(json.executeJSON(sen.get(i), old, lastpackagedate));
 		}
 		pak.print();
 		return pak;
@@ -42,7 +48,6 @@ public class dataPackageFactory {
 
 	/**
 	 * Deze methode initialiseert een linkedlist van de devices uit sense
-	 * NOTE!! bij het maken van een sensor is de field data_structure soms leeg, moet dit nog afvangen.
 	 * 
 	 * @throws Exception
 	 */

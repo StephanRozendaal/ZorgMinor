@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Main {
 
 	/**
@@ -7,6 +9,7 @@ public class Main {
 		try {
 			dataPackageFactory factory = new dataPackageFactory();
 			dataPackage dat = factory.requestNewPackage();
+			LinkedList<sensorData> list = dat.getSensorData();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
