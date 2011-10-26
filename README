@@ -1,1 +1,10 @@
-eerste versie
+Applicatie voor minor Smartdevices en Techniek in de Zorg.
+
+Deze applicatie werkt met sensor-data afkomstig van het Sense Platform.
+
+TODO:
+	-Het controleren van sensorgegevens
+	-Aan deze gegevens een warninglevel hangen
+	-Een front-end maken voor deze applicatie(Web, Java-GUI app of ...?)
+	-Alerts toevoegen met betrekking tot het warninglevel (welke acties)
+
