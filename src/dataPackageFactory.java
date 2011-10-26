@@ -7,7 +7,6 @@ import net.sf.json.JSONSerializer;
 
 /**
  * Deze factory maakt dataPackages uit sense sensor data
- * 
  * @author stephan
  * 
  */
@@ -79,7 +78,7 @@ public class dataPackageFactory {
 				j++;
 			}
 			devices.add(device);
-			//device.print();
+			device.print();
 		}
 	}
 }

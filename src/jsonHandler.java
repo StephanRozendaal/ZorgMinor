@@ -7,6 +7,11 @@ import java.util.Date;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
+/**
+ * Deze klasse haalt JSON gegevens op.
+ * @author stephan
+ *
+ */
 public class jsonHandler {
 
 	private HttpURLConnection connection;

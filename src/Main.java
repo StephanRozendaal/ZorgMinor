@@ -2,9 +2,6 @@ import java.util.LinkedList;
 
 public class Main {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		try {
 			dataPackageFactory factory = new dataPackageFactory();
@@ -15,5 +12,4 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-
 }

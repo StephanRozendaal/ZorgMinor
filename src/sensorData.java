@@ -2,10 +2,13 @@ import java.util.Date;
 import net.sf.json.JSONObject;
 import static java.lang.System.out;
 
+/**
+ * Dataklasse voor sensordata
+ * @author stephan
+ *
+ */
 public class sensorData {
-	/**
-	 * Dataklasse voor sensordata
-	 */
+	
 	int id, sensor_id;
 	Date date;
 	Object value;

@@ -6,7 +6,6 @@ import net.sf.json.JSONObject;
 
 /**
  * Deze klasse houdt sensordata vast uit sense van data tussen twee tijdstippen.
- * 
  * @author stephan
  */
 

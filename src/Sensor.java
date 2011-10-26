@@ -1,9 +1,7 @@
 import static java.lang.System.out;
 
 /**
- * Sensor dataklasse
- * TODO data_structure field oplossing zoeken.
- * dit field kan varieren, JSONobject, boolean of string etc..
+ * Sensor dataklasse, houdt sensordata vast.
  * @author stephan
  *
  */

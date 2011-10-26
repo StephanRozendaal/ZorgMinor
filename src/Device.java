@@ -1,6 +1,11 @@
 import java.util.LinkedList;
 import static java.lang.System.out;
 
+/**
+ * Dit is een dataklasse voor sense devices
+ * @author stephan
+ *
+ */
 public class Device {
 
 	private int ID;

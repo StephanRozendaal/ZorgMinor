@@ -3,6 +3,11 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Deze klasse logt in op sense en haalt een sesion_id op, dit wordt gebruikt om JSON requests te doen.
+ * @author stephan
+ *
+ */
 public class loginToSense {
 	private HttpURLConnection connection;
 	private URL sense_login;
